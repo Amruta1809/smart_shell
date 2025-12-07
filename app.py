@@ -11,7 +11,7 @@ load_dotenv()
 
 # (Optional debug check – only shows in terminal, not UI)
 API_KEY = os.getenv("OPENROUTER_API_KEY")
-print("API KEY from app.py:", API_KEY)
+
 
 # --- SYSTEM PROMPT ---
 SYSTEM_PROMPT = """
