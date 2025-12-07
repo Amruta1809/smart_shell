@@ -2,12 +2,12 @@ import requests
 import os
 from dotenv import load_dotenv
 
+# Load .env variables safely
 load_dotenv(override=True)
 
 API_KEY = os.getenv("OPENROUTER_API_KEY")
-print("Loaded API Key:", API_KEY[:15] + "..." if API_KEY else "❌ None")
 
-# Free models list (priority order)
+# Available free models on OpenRouter
 FREE_MODELS = [
     "meta-llama/llama-3.3-70b-instruct:free",
     "tngtech/deepseek-r1t2-chimera:free",
@@ -17,12 +17,14 @@ FREE_MODELS = [
     "google/gemini-2.0-flash-exp:free"
 ]
 
-DEFAULT_MODEL = FREE_MODELS[1]
+DEFAULT_MODEL = FREE_MODELS[1]   # auto-selected free model
 
 
 def query_llm(system_prompt, user_input, model=DEFAULT_MODEL):
+    """Send a message to the OpenRouter model."""
+
     if not API_KEY:
-        return "❌ Missing API key in .env"
+        return "❌ Missing API key in .env file!"
 
     headers = {
         "Authorization": f"Bearer {API_KEY}",
@@ -50,14 +52,12 @@ def query_llm(system_prompt, user_input, model=DEFAULT_MODEL):
         if response.status_code != 200:
             return f"⚠️ HTTP {response.status_code}: {response.text}"
 
-        result = response.json()
-
-        return result["choices"][0]["message"]["content"]
+        return response.json()["choices"][0]["message"]["content"]
 
     except Exception as e:
         return f"❌ Error: {str(e)}"
 
 
-# 🔥 Test message
+# Running directly (optional for debugging only)
 if __name__ == "__main__":
-    print(query_llm("You are an assistant.", "Hello, tell me something cool!"))
+    print(query_llm("You are a helpful assistant.", "Hello! Tell me something cool."))
