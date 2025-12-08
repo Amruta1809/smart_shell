@@ -17,10 +17,14 @@ venv\Scripts\activate # Windows
 
 ## Run Test Cases
 This project includes two test scripts to verify the setup and parsing logic
+
 1️.Test OpenRouter API Connection
+
     python testopenrouter.py (Checks whether the .env key is loaded and Makes a minimal test request to confirm the API is working)
 2.Test Parser Logic
+
     python testparser.py (The model returns correct JSON when required and The parser extracts tool names and arguments properly)
+
   pytest(Runs all test files at once)
 
 
