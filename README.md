@@ -30,7 +30,7 @@ This project includes two test scripts to verify the setup and parsing logic
 
 
 ## Model Choice:
-Chosen free model: amazon/nova-2-lite-v1
+Chosen free model:tngtech/deepseek-r1t2-chimera:free
 - Lightweight, fast, general-purpose, free to use.
 
 ## Usage Examples:
